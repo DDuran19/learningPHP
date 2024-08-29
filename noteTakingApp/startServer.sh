@@ -1,0 +1,1 @@
+php -S localhost:5173 -t public
