@@ -45,6 +45,18 @@ class Database
             return Router::abort(500);
         }
     }
+    public function update($query, $params = [])
+    {
+        try {
+            $statement = $this->connection->prepare($query);
+            $result = $statement->execute($params);
+            $this->statement = $statement;
+            return $result;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return Router::abort(500);
+        }
+    }
     public function delete($query, $params = [])
     {
         $statement = $this->connection->prepare($query);

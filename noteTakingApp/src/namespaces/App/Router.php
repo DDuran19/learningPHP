@@ -53,7 +53,7 @@ class Router
         HttpMethod::POST => 'store',
         HttpMethod::PUT => 'put',
         HttpMethod::DELETE => 'destroy',
-        HttpMethod::PATCH => 'patch',
+        HttpMethod::PATCH => 'edit',
     ];
     function getFileName($route, $action)
     {

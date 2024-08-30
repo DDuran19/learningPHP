@@ -3,9 +3,14 @@ if (isset($_POST['__method']) && $_POST['__method'] === 'DELETE') {
     require(__DIR__ . '/destroy.php');
     exit();
 }
+if (isset($_POST['__method']) && $_POST['__method'] === 'PATCH') {
+    require(__DIR__ . '/edit.php');
+    exit();
+}
 
 use App\App;
 use App\Database;
+use App\FormValidator;
 
 $db = App::resolve(Database::class);
 requireValidators("FormValidator.php");

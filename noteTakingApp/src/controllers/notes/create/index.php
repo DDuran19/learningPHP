@@ -2,6 +2,7 @@
 
 use App\App;
 use App\Database;
+use App\FormValidator;
 
 $db = App::resolve(Database::class);
 requireValidators("FormValidator.php");
