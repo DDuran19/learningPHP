@@ -1,3 +1,4 @@
 <?php
 $heading = "Contact Us";
-require(__DIR__ . "/view.php");
+
+renderView("contact", ['heading' => $heading]);

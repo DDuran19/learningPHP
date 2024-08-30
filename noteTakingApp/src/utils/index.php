@@ -20,14 +20,20 @@ function getPathname(): string
 {
     return parse_url(getUri(), PHP_URL_PATH);
 };
-function authorize($condition, $statusCode = Response::FORBIDDEN): void
-{
-    if (!$condition) {
+// function authorize($condition, $statusCode = Response::FORBIDDEN): void
+// {
+//     if (!$condition) {
 
-        abort($statusCode);
-    }
-}
+//         abort($statusCode);
+//     }
+// }
 function getValueIfKeyExists($array, $key)
 {
     return $array[$key] ?? '';
+}
+
+function renderView(string $view, array $data = [])
+{
+    extract($data);
+    require VIEWS . $view . '/view.php';
 }

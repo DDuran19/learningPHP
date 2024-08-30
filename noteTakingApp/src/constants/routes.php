@@ -1,20 +1,20 @@
 <?php
 
-// return [
-//     "/" => "/routes/home/index.php",
-//     "/home" => "/routes/home/index.php",
-//     "/about" => "/routes/about/index.php",
-//     "/contact" => "/routes/contact/index.php",
-//     "/notes" => "/routes/notes/index.php",
-//     "/notes/create" => "/routes/notes/create/index.php",
-//     "/note" => "/routes/note/index.php",
-// ];
+use App\Controllers;
+use App\Router;
 
+$router = new Router();
 
-$router->get("/", "home");
-$router->get("/home", "home");
-$router->get("/about", "about");
-$router->get("/contact", "contact");
-$router->get("/notes", "notes");
-$router->get("/notes/create", "notes/create");
-$router->get("/note", "note");
+$router->get("/", Controllers::HOME)
+    ->get("/home", Controllers::HOME)
+    ->get("/about", Controllers::ABOUT)
+    ->get("/contact", Controllers::CONTACT)
+    ->get("/notes", Controllers::NOTES)
+    ->get("/notes/create", Controllers::NOTES_CREATE)
+    ->post("/notes/create", Controllers::NOTES_CREATE)
+    ->post("/notes", Controllers::NOTES)
+    ->delete("/notes", Controllers::NOTES)
+    ->get("/notes/:id", Controllers::NOTES, true)
+    ->post("/notes/:id", Controllers::NOTES, true);
+
+return $router;

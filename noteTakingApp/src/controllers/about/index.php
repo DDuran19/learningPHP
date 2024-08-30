@@ -2,4 +2,4 @@
 
 $heading = "About Us";
 
-require(__DIR__ . "/view.php");
+renderView("about", ['heading' => $heading]);

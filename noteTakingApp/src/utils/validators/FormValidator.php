@@ -6,6 +6,9 @@ class FormValidator
     {
         $value = trim($value);
 
+        var_dump($min, $max, strlen($value));
+
+        var_dump(strlen($value) >= $min && strlen($value) <= $max);
         return strlen($value) >= $min && strlen($value) <= $max;
     }
 }

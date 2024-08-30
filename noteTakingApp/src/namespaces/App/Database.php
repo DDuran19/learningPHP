@@ -32,8 +32,32 @@ class Database
         return $this->statement->fetchAll();
     }
 
+    public function insert($query, $params = [])
+    {
+        try {
+
+            $statement = $this->connection->prepare($query);
+            $statement->execute($params);
+            $this->statement = $statement;
+            return $this->connection->lastInsertId();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return Router::abort(500);
+        }
+    }
+    public function delete($query, $params = [])
+    {
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
+        $this->statement = $statement;
+        return $this;
+    }
     public function findOrFail($code = 404)
     {
-        return $this->fetch() ?: abort($code);
+        $result = $this->fetch();
+        if (!$result) {
+            return Router::abort($code);
+        }
+        return $result;
     }
 }

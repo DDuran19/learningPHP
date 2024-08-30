@@ -13,7 +13,7 @@ if (isset($id)) {
         'id' => $id,
     ])->findOrFail();
 
-    authorize($note['userId'] === $currentUserId);
+    // authorize($note['userId'] === $currentUserId);
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $db->query("DELETE FROM notes WHERE id = :id", [
             'id' => $id,
@@ -23,7 +23,7 @@ if (isset($id)) {
     }
 
 
-    require(__DIR__ . "/view.php");
+    renderView("note", ['heading' => $heading]);
 } else {
     echo "Note not found";
 }

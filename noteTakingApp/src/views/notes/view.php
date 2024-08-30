@@ -8,7 +8,7 @@
             <ul class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 <?php foreach ($notes as $note) : ?>
                     <li>
-                        <a class="text-blue-500 hover:underline" href="/note?id=<?= $note['id'] ?>">
+                        <a class="text-blue-500 hover:underline" href="/notes/<?= $note['id'] ?>">
                             <?= htmlspecialchars($note['body']) ?>
                         </a>
                     </li>

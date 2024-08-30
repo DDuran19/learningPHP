@@ -1,4 +1,6 @@
 <?php
 
 $heading = "Home";
-require(__DIR__ . "/view.php");
+
+
+renderView("home", ['heading' => $heading]);
