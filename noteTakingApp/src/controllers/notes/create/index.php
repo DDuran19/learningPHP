@@ -12,19 +12,16 @@ $form = $_POST;
 
 $errors = [];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (!FormValidator::string($form['body'])) {
+if (!FormValidator::string($form['body'])) {
 
-        $errors["body"] = "Please enter a note below";
-    } else {
-        $result = $db->query("INSERT INTO notes (body, userId) VALUES (:body, :userId)", [
-            'body' => $form['body'],
-            'userId' => 1,
-        ]);
-
-        header("Location: /notes/");
-        exit();
-    }
+    $errors["body"] = "Please enter a note below";
 }
 
-renderView("notes/create", ['heading' => $heading, 'errors' => $errors]);
+if (count($errors) !== 0) renderView("notes/create", ['heading' => $heading, 'errors' => $errors]);
+
+$result = $db->query("INSERT INTO notes (body, userId) VALUES (:body, :userId)", [
+    'body' => $form['body'],
+    'userId' => 1,
+]);
+
+header("Location: /notes/");
