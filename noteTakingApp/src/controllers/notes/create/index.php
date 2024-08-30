@@ -1,13 +1,14 @@
 <?php
 
+use App\App;
 use App\Database;
 
+$db = App::resolve(Database::class);
 requireValidators("FormValidator.php");
 
 $heading = "Create Note";
 
 $form = $_POST;
-$db = new Database();
 
 $errors = [];
 
