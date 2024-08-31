@@ -1,6 +1,7 @@
 <?php
 
 use App\Response;
+use App\Router;
 
 function dd($var = null)
 {
@@ -20,13 +21,13 @@ function getPathname(): string
 {
     return parse_url(getUri(), PHP_URL_PATH);
 };
-// function authorize($condition, $statusCode = Response::FORBIDDEN): void
-// {
-//     if (!$condition) {
+function authorize($condition, $statusCode = Response::FORBIDDEN): void
+{
+    if (!$condition) {
 
-//         abort($statusCode);
-//     }
-// }
+        Router::abort($statusCode);
+    }
+}
 function getValueIfKeyExists($array, $key)
 {
     return $array[$key] ?? '';

@@ -14,6 +14,8 @@ $router->get("/", Controllers::HOME)
     ->post("/notes/create", Controllers::NOTES_CREATE)
     ->post("/notes", Controllers::NOTES)
     ->delete("/notes", Controllers::NOTES)
+    ->post("/register", Controllers::REGISTER)
+    ->post("/login", Controllers::LOGIN)
     ->get("/notes/:id", Controllers::NOTES, true)
     ->post("/notes/:id", Controllers::NOTES, true);
 

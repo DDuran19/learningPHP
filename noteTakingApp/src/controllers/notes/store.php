@@ -11,6 +11,7 @@ if (isset($_POST['__method']) && $_POST['__method'] === 'PATCH') {
 use App\App;
 use App\Database;
 use App\FormValidator;
+use App\Response;
 
 $db = App::resolve(Database::class);
 requireValidators("FormValidator.php");
@@ -20,6 +21,9 @@ $heading = "Create Note";
 $form = $_POST;
 
 $errors = [];
+
+$currentUserId = 3;
+authorize($note['userId'] === $currentUserId, Response::FORBIDDEN);
 
 if (!FormValidator::string($form['body'])) {
     $errors["body"] = "Please enter a note below";

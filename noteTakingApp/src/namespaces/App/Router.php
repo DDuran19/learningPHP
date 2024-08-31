@@ -19,6 +19,8 @@ abstract class Controllers
     public const NOTES = "notes";
     public const NOTES_CREATE = "notes/create";
     public const ERROR = "error";
+    public const REGISTER = "register";
+    public const LOGIN = "login";
 }
 
 class RouteParams

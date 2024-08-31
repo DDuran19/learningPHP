@@ -3,6 +3,7 @@
 use App\App;
 use App\Database;
 use App\FormValidator;
+use App\Response;
 
 $db = App::resolve(Database::class);
 requireValidators("FormValidator.php");
@@ -12,6 +13,9 @@ $heading = "Create Note";
 $form = $_POST;
 
 $errors = [];
+
+$currentUserId = 3;
+authorize($note['userId'] === $currentUserId, Response::FORBIDDEN);
 
 if (!FormValidator::string($form['body'])) {
 
