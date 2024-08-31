@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
     if (! isset($note)) {
         Router::abort(Response::FORBIDDEN);
     }
-    authorize($note['userId'] === $_SESSION['user'], Response::FORBIDDEN);
+
+    authorize($note['userId'] == $_SESSION['user'], Response::FORBIDDEN);
     renderView("note", ['heading' => $heading, 'note' => $note, 'errors' => $errors]);
     exit();
 }
@@ -35,7 +36,7 @@ $db->query("UPDATE notes SET body = :body WHERE id = :id", [
     'id' => $id,
     'body' => $form['body'],
 ]);
-$note = $note = $db->query("SELECT * FROM notes WHERE id = :id", [
+$note = $db->query("SELECT * FROM notes WHERE id = :id", [
     'id' => $id,
 ])->findOrFail();
 renderView("note", ['heading' => $heading, 'note' => $note, 'errors' => $errors]);

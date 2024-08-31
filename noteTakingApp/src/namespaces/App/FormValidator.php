@@ -4,7 +4,7 @@ namespace App;
 
 class FormValidator
 {
-    public static function string(string $value, int $min = 3, int $max = INF): bool
+    public static function string(string $value, int $min = 3, float | int $max = INF): bool
     {
         $value = trim($value);
         return strlen($value) >= $min && strlen($value) <= $max;

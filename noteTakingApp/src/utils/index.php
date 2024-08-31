@@ -21,7 +21,7 @@ function getPathname(): string
 {
     return parse_url(getUri(), PHP_URL_PATH);
 };
-function authorize($condition, $statusCode = Response::FORBIDDEN): void
+function authorize(bool $condition, $statusCode = Response::FORBIDDEN): void
 {
     if (!$condition) {
 

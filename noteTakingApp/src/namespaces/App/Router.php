@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Middlewares\Middleware;
+
 abstract class HttpMethod
 {
     public const GET = 'get';
@@ -83,7 +85,7 @@ class Router
             'method' => $route->method
         ];
     }
-    public function get($uri, $controller, bool $view = false)
+    public function get($uri, $controller, bool $view = false, array ...$middlewares)
     {
         array_push($this->routes, $this->_addRoute(new RouteParams($uri, $controller, HttpMethod::GET, $view)));
         return $this;
@@ -143,6 +145,15 @@ class Router
 
             if ($notMatched === 0) {
                 if (strtoupper($route['method']) === $_SERVER['REQUEST_METHOD']) {
+
+                    if (isset($route['middlewares'])) {
+                        $middlewares = $route['middlewares'];
+                        foreach ($middlewares as $middleware) {
+                            if (is_callable($middleware)) {
+                                call_user_func($middleware);
+                            }
+                        }
+                    }
                     return require $route['controller'];
                 }
             }
@@ -156,5 +167,16 @@ class Router
         http_response_code($code);
         require VIEWS . '/errors/' . $code . '.php';
         exit();
+    }
+
+    public function then(callable $middleware)
+    {
+        $lastItemIndex = array_key_last($this->routes);
+
+        if (!isset($this->routes[$lastItemIndex]['middlewares'])) {
+            $this->routes[$lastItemIndex]['middlewares'] = [];
+        }
+        array_push($this->routes[$lastItemIndex]['middlewares'], $middleware);
+        return $this;
     }
 }
