@@ -15,13 +15,11 @@ $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
     $note = $note = $db->query("SELECT * FROM notes WHERE id = :id", [
         'id' => $id,
-    ])->findOrFail();
-
-    $currentUserId = 3;
+    ])->findOrFail();;
     if (! isset($note)) {
         Router::abort(Response::FORBIDDEN);
     }
-    authorize($note['userId'] === $currentUserId, Response::FORBIDDEN);
+    authorize($note['userId'] === $_SESSION['user'], Response::FORBIDDEN);
     renderView("note", ['heading' => $heading, 'note' => $note, 'errors' => $errors]);
     exit();
 }

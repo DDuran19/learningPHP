@@ -32,7 +32,7 @@ class Database
         return $this->statement->fetchAll();
     }
 
-    public function insert($query, $params = [])
+    public function insert($query, $params = [], $catchExceptions = true)
     {
         try {
 
@@ -41,8 +41,11 @@ class Database
             $this->statement = $statement;
             return $this->connection->lastInsertId();
         } catch (\Exception $e) {
-            echo $e->getMessage();
-            return Router::abort(500);
+            if ($catchExceptions) {
+                // echo $e->getMessage();
+                return Router::abort(500);
+            }
+            throw $e;
         }
     }
     public function update($query, $params = [])

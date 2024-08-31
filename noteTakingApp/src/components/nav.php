@@ -24,7 +24,19 @@ function highlight($path)
                         <a href="/notes" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-700 hover:text-white <?= highlight("/notes") ?> ">Notes</a>
                     </div>
                 </div>
+
             </div>
+            <div class="ml-auto flex items-center space-x-4">
+                <?php if (isset($_SESSION['user'])): ?>
+                    <span>LOGGED IN!</span>
+                    <a href="/logout" class="text-blue-500 hover:underline">Logout</a>
+                <?php else: ?>
+                    <a href="/register" class="text-blue-500 hover:underline">Register now!</a>
+                    <a href="/login" class="text-blue-500 hover:underline">Login</a>
+                <?php endif; ?>
+            </div>
+
+
         </div>
     </div>
 </nav>

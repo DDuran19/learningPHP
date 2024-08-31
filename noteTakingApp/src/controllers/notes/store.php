@@ -20,10 +20,8 @@ $heading = "Create Note";
 
 $form = $_POST;
 
-$errors = [];
-
-$currentUserId = 3;
-authorize($note['userId'] === $currentUserId, Response::FORBIDDEN);
+$errors = [];;
+authorize($note['userId'] === $_SESSION['user'], Response::FORBIDDEN);
 
 if (!FormValidator::string($form['body'])) {
     $errors["body"] = "Please enter a note below";
