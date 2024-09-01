@@ -2,7 +2,7 @@
 
 define('ROOT_DIR', __DIR__);
 define('SOURCE', ROOT_DIR . "/src");
-define('CONTROLLERS', SOURCE . "/controllers/");
+define('CONTROLLERS', SOURCE . "/http/controllers/");
 define('VIEWS', SOURCE . "/views/");
 define('COMPONENTS', SOURCE . "/components/");
 define('CONSTANTS', SOURCE . "/constants/");
