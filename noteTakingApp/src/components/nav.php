@@ -28,7 +28,7 @@ function highlight($path)
             </div>
             <div class="ml-auto flex items-center space-x-4">
                 <?php if (isset($_SESSION['user'])): ?>
-                    <span>LOGGED IN!</span>
+                    <span class="text-white">LOGGED IN!</span>
                     <form class="text-blue-500 hover:underline" action="/logout" method="post">
                         <input type="hidden" name="__method" value="delete" />
                         <button type="submit">Logout</button>
