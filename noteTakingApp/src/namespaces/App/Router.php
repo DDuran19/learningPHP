@@ -148,8 +148,14 @@ class Router
 
                     if (isset($route['middlewares'])) {
                         $middlewares = $route['middlewares'];
-                        foreach ($middlewares as $middleware) {
-                            if (is_callable($middleware)) {
+                        foreach ($middlewares as $mw) {
+                            $middleware = $mw['middleware'];
+                            $params = $mw['params'];
+                            if (is_callable($middleware) && is_array($params)) {
+
+                                // dd(["middleware" => $middleware, "params" => $params]);
+                                call_user_func($middleware, $params);
+                            } else if (is_callable($middleware)) {
                                 call_user_func($middleware);
                             }
                         }
@@ -169,14 +175,14 @@ class Router
         exit();
     }
 
-    public function then(callable $middleware)
+    public function then(callable $middleware, array $params = [])
     {
         $lastItemIndex = array_key_last($this->routes);
 
         if (!isset($this->routes[$lastItemIndex]['middlewares'])) {
             $this->routes[$lastItemIndex]['middlewares'] = [];
         }
-        array_push($this->routes[$lastItemIndex]['middlewares'], $middleware);
+        array_push($this->routes[$lastItemIndex]['middlewares'], ['middleware' => $middleware, 'params' => $params]);
         return $this;
     }
 }

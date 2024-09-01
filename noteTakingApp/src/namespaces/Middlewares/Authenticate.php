@@ -8,8 +8,8 @@ use Middlewares\Middleware;
 
 class Authenticate extends Middleware
 {
-    public const run = [self::class, 'resolve'];
-    public static function resolve(mixed $optionalCallback = null)
+    public const handle = [self::class, 'resolve'];
+    public static function resolve(array $params = [])
     {
         $user = $_SESSION['user'] ?? null;
 
@@ -30,8 +30,10 @@ class Authenticate extends Middleware
 
         $_SESSION['userDetails'] = $user;
 
-        if (is_callable($optionalCallback)) {
-            call_user_func($optionalCallback);
+        foreach ($params as $param) {
+            if (is_callable($param)) {
+                call_user_func($param);
+            }
         }
     }
 }
