@@ -2,27 +2,21 @@
 
 use Core\App;
 use Core\Database;
-use Core\FormValidator;
+use http\forms\LoginForm;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$errors = [];
 
-if (isset($email) && FormValidator::email($email) === false) {
-    $errors['email'] = 'Please enter a valid email';
-}
+$form = new LoginForm();
+$form->validate(['email' => $email, 'password' => $password]);
+$errors = $form->getErrors();
 
-if (isset($password) && FormValidator::string($password, 7, 255) === false) {
-    $errors['password'] = 'Please enter a valid password (7-255 characters)';
-}
 
 if (count($errors) !== 0) {
     renderView("login", ['heading' => 'Login', 'errors' => $errors]);
     exit();
 }
-
-
 $db = App::resolve(Database::class);
 
 $result = $db->query("SELECT * FROM users WHERE email = :email", [
