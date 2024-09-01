@@ -43,6 +43,11 @@ function requireClasses()
     spl_autoload_register(function ($class) {
 
         $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
-        require(SOURCE . "/namespaces/" . $class . ".php");
+
+        if (str_starts_with($class, "Middleware")) {
+
+            return require(SOURCE . "/Core/" . $class . ".php");
+        }
+        return require(SOURCE . "/" . $class . ".php");
     });
 }
