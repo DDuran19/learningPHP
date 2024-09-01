@@ -18,7 +18,7 @@ if (isset($password) && FormValidator::string($password, 7, 255) === false) {
 }
 
 if (count($errors) !== 0) {
-    renderView("register", ['heading' => 'Register', 'errors' => $errors]);
+    renderView("login", ['heading' => 'Login', 'errors' => $errors]);
     exit();
 }
 
@@ -31,13 +31,13 @@ $result = $db->query("SELECT * FROM users WHERE email = :email", [
 
 if (!$result) {
     $errors['email'] = 'Email not found.';
-    renderView("login", ['heading' => 'Register', 'errors' => $errors]);
+    renderView("login", ['heading' => 'Login', 'errors' => $errors]);
     exit();
 }
 
 if (!password_verify($password, $result['password'])) {
     $errors['password'] = 'Incorrect password';
-    renderView("login", ['heading' => 'Register', 'errors' => $errors]);
+    renderView("login", ['heading' => 'Login', 'errors' => $errors]);
     exit();
 }
 
