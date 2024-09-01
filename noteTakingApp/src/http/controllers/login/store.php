@@ -1,6 +1,7 @@
 <?php
 
 use Core\App;
+use Core\Authenticator;
 use Core\Database;
 use http\forms\LoginForm;
 
@@ -14,26 +15,20 @@ $errors = $form->getErrors();
 
 
 if (count($errors) !== 0) {
-    renderView("login", ['heading' => 'Login', 'errors' => $errors]);
-    exit();
+    renderView("login", ['heading' => 'Login', 'errors' => $errors], true);
 }
+
+$auth = new Authenticator();
 $db = App::resolve(Database::class);
+$auth->attempt($db, ['email' => $email, 'password' => $password]);
 
-$result = $db->query("SELECT * FROM users WHERE email = :email", [
-    'email' => $email,
-])->fetch();
-
-if (!$result) {
-    $errors['email'] = 'Email not found.';
-    renderView("login", ['heading' => 'Login', 'errors' => $errors]);
-    exit();
+$errors = $auth->getErrors();
+if ($errors) {
+    renderView("login", ['heading' => 'Login', 'errors' => $errors], true);
 }
 
-if (!password_verify($password, $result['password'])) {
-    $errors['password'] = 'Incorrect password';
-    renderView("login", ['heading' => 'Login', 'errors' => $errors]);
-    exit();
+$success = $auth->login();
+if (!$success) {
+    renderView("login", ['heading' => 'Login', 'errors' => $auth->getErrors()], true);
 }
-
-login($result);
-header("Location: /");
+redirect('/');

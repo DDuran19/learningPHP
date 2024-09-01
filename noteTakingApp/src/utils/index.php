@@ -33,24 +33,16 @@ function getValueIfKeyExists($array, $key)
     return $array[$key] ?? '';
 }
 
-function renderView(string $view, array $data = [])
+function renderView(string $view, array $data = [], bool $exit = false)
 {
     extract($data);
     require VIEWS . $view . '/view.php';
+    if ($exit) {
+        return exit();
+    }
 }
-function login($result)
+function redirect(string $path)
 {
-    $_SESSION['user'] = $result['id'];
-    $_SESSION['userDetails'] = $result;
-
-    session_regenerate_id(true);
-}
-function logout()
-{
-    $_SESSION['user'] = null;
-    $_SESSION['userDetails'] = null;
-    session_destroy();
-
-    $params = session_get_cookie_params();
-    setcookie("PHPSESSID", '', time() - 60, $params['path'], $params['domain'], $params['secure'], $params['httponly'],);
+    header("Location: $path");
+    exit();
 }
