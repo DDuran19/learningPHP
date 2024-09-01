@@ -1,9 +1,9 @@
 <?php
 
-use App\App;
-use App\Database;
-use App\FormValidator;
-use App\Response;
+use Core\App;
+use Core\Database;
+use Core\FormValidator;
+use Core\Response;
 
 $db = App::resolve(Database::class);
 

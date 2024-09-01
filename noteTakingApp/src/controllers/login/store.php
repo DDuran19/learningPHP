@@ -1,10 +1,10 @@
 <?php
 
-use App\App;
-use App\Database;
-use App\FormValidator;
-use App\Response;
-use App\Router;
+use Core\App;
+use Core\Database;
+use Core\FormValidator;
+use Core\Response;
+use Core\Router;
 
 $email = $_POST['email'];
 $password = $_POST['password'];

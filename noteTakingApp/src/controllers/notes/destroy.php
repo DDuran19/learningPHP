@@ -1,9 +1,9 @@
 <?php
 
-use App\App;
-use App\Database;
-use App\Response;
-use App\Router;
+use Core\App;
+use Core\Database;
+use Core\Response;
+use Core\Router;
 
 $db = App::resolve(Database::class);
 $heading = "My Notes";

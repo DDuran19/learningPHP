@@ -1,6 +1,6 @@
 <?php
 
-use App\Database;
+use Core\Database;
 
 $heading = "My Notes";
 

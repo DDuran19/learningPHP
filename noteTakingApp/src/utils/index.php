@@ -1,7 +1,7 @@
 <?php
 
-use App\Response;
-use App\Router;
+use Core\Response;
+use Core\Router;
 
 function dd($var = null)
 {

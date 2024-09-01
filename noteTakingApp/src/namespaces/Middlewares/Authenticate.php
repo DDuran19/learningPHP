@@ -2,8 +2,8 @@
 
 namespace Middlewares;
 
-use App\App;
-use App\Database;
+use Core\App;
+use Core\Database;
 use Middlewares\Middleware;
 
 class Authenticate extends Middleware

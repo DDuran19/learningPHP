@@ -1,7 +1,7 @@
 <?php
 
-use App\App;
-use App\Database;
+use Core\App;
+use Core\Database;
 
 $db = App::resolve(Database::class);
 $heading = "My Notes";

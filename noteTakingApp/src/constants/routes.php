@@ -1,7 +1,7 @@
 <?php
 
-use App\Controllers;
-use App\Router;
+use Core\Controllers;
+use Core\Router;
 use Middlewares\Authenticate;
 use Middlewares\Role;
 

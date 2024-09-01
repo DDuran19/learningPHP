@@ -8,9 +8,9 @@ if (isset($_POST['__method']) && $_POST['__method'] === 'PATCH') {
     exit();
 }
 
-use App\App;
-use App\Database;
-use App\FormValidator;
+use Core\App;
+use Core\Database;
+use Core\FormValidator;
 
 $db = App::resolve(Database::class);
 
