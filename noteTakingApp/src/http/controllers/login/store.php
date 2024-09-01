@@ -3,8 +3,6 @@
 use Core\App;
 use Core\Database;
 use Core\FormValidator;
-use Core\Response;
-use Core\Router;
 
 $email = $_POST['email'];
 $password = $_POST['password'];

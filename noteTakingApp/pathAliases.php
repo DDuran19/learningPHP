@@ -44,10 +44,6 @@ function requireClasses()
 
         $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
 
-        if (str_starts_with($class, "Middleware")) {
-
-            return require(SOURCE . "/Core/" . $class . ".php");
-        }
         return require(SOURCE . "/" . $class . ".php");
     });
 }

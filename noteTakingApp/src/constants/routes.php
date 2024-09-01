@@ -2,8 +2,8 @@
 
 use Core\Controllers;
 use Core\Router;
-use Middlewares\Authenticate;
-use Middlewares\Role;
+use Core\Middlewares\Authenticate;
+use Core\Middlewares\Role;
 
 $router = new Router();
 

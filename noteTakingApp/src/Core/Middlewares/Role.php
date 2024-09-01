@@ -1,10 +1,8 @@
 <?php
 
-namespace Middlewares;
+namespace Core\Middlewares;
 
-use Core\App;
-use Core\Database;
-use Middlewares\Middleware;
+use Core\Middlewares\Middleware;
 
 class Role extends Middleware
 {
