@@ -32,7 +32,7 @@ $result = $db->query("SELECT * FROM users WHERE email = :email", [
 ])->fetch();
 
 if (!$result) {
-    $errors['email'] = 'Email not found';
+    $errors['email'] = 'Email not found.';
     renderView("login", ['heading' => 'Register', 'errors' => $errors]);
     exit();
 }
@@ -43,5 +43,5 @@ if (!password_verify($password, $result['password'])) {
     exit();
 }
 
-$_SESSION['user'] = $result;
+login($result);
 header("Location: /");

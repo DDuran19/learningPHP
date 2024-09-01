@@ -20,6 +20,7 @@ $router->get("/", Controllers::HOME)
     ->get("/login", Controllers::LOGIN)
     ->post("/register", Controllers::REGISTER)
     ->post("/login", Controllers::LOGIN)
+    ->post("/logout", Controllers::LOGOUT)
     ->get("/notes/:id", Controllers::NOTES, true)
     ->post("/notes/:id", Controllers::NOTES, true)->then(Authenticate::handle);
 

@@ -23,6 +23,7 @@ abstract class Controllers
     public const ERROR = "error";
     public const REGISTER = "register";
     public const LOGIN = "login";
+    public const LOGOUT = "logout";
 }
 
 class RouteParams

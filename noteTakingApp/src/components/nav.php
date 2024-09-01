@@ -29,7 +29,10 @@ function highlight($path)
             <div class="ml-auto flex items-center space-x-4">
                 <?php if (isset($_SESSION['user'])): ?>
                     <span>LOGGED IN!</span>
-                    <a href="/logout" class="text-blue-500 hover:underline">Logout</a>
+                    <form class="text-blue-500 hover:underline" action="/logout" method="post">
+                        <input type="hidden" name="__method" value="delete" />
+                        <button type="submit">Logout</button>
+                    </form>
                 <?php else: ?>
                     <a href="/register" class="text-blue-500 hover:underline">Register now!</a>
                     <a href="/login" class="text-blue-500 hover:underline">Login</a>
