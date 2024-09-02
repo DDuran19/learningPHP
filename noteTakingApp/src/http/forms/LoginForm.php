@@ -13,14 +13,21 @@ class LoginForm
         $password = $attributes['password'];
 
         if (isset($email) && !FormValidator::email($email)) {
-            $errors['email'] = 'Please enter a valid email';
+            $this->error(['email' => 'Please enter a valid email']);
         }
 
         if (isset($password) && !FormValidator::string($password, 7, 50)) {
-            $errors['password'] = 'Please enter a valid password (7-50 characters)';
+            $this->error(['password' => 'Please enter a valid password (7-50 characters)']);
         }
 
         return !empty($this->errors);
+    }
+
+    public function error(array $errors)
+    {
+        foreach ($errors as $key => $message) {
+            $this->errors[$key] = $message;
+        }
     }
 
     public function getErrors()

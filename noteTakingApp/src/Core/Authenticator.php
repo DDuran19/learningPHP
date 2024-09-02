@@ -7,7 +7,7 @@ class Authenticator
     protected $errors = [];
     protected $user;
 
-    public function attempt(Database $db, array $attributes)
+    public function attempt(Database $db, array $attributes, callable $loginCallback)
     {
         $email = $attributes['email'];
         $password = $attributes['password'];
@@ -20,9 +20,14 @@ class Authenticator
             $this->errors['email'] = 'Invalid email';
         } elseif (!password_verify($password, $this->user['password'])) {
             $this->errors['password'] = 'Invalid password';
+        } else {
+            if ($this->login()) {
+                call_user_func($loginCallback);
+                return true;
+            };
+            $this->errors['message'] = 'Something went wrong, please try again';
         }
-
-        return !!$this->user;
+        return false;
     }
     public function getErrors()
     {

@@ -5,30 +5,22 @@ use Core\Authenticator;
 use Core\Database;
 use http\forms\LoginForm;
 
+$db = App::resolve(Database::class);
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 
 $form = new LoginForm();
 $form->validate(['email' => $email, 'password' => $password]);
-$errors = $form->getErrors();
 
+if (count($form->getErrors()) === 0) {
+    $auth = new Authenticator();
 
-if (count($errors) !== 0) {
-    renderView("login", ['heading' => 'Login', 'errors' => $errors], true);
+    $result = $auth->attempt($db, ['email' => $email, 'password' => $password], function () {
+        redirect('/');
+    });
+    $form->error([...$auth->getErrors()]);
 }
 
-$auth = new Authenticator();
-$db = App::resolve(Database::class);
-$auth->attempt($db, ['email' => $email, 'password' => $password]);
-
-$errors = $auth->getErrors();
-if ($errors) {
-    renderView("login", ['heading' => 'Login', 'errors' => $errors], true);
-}
-
-$success = $auth->login();
-if (!$success) {
-    renderView("login", ['heading' => 'Login', 'errors' => $auth->getErrors()], true);
-}
-redirect('/');
+renderView("login", ['heading' => 'Login', 'errors' => $form->getErrors()], true);
