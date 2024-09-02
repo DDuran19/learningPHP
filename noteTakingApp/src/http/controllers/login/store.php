@@ -17,7 +17,7 @@ $form->validate(['email' => $email, 'password' => $password]);
 if (count($form->getErrors()) === 0) {
     $auth = new Authenticator();
 
-    $result = $auth->attempt($db, ['email' => $email, 'password' => $password], function () {
+    $auth->attempt($db, ['email' => $email, 'password' => $password], function () {
         redirect('/');
     });
     $form->error([...$auth->getErrors()]);
