@@ -49,8 +49,7 @@ class Authenticator
     }
     public static function logout()
     {
-        $_SESSION['user'] = null;
-        $_SESSION['userDetails'] = null;
+        Session::flush();
         session_destroy();
 
         $params = session_get_cookie_params();
