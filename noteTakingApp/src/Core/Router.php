@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Errors\ValidationException;
+
 abstract class HttpMethod
 {
     public const GET = 'get';
@@ -116,55 +118,67 @@ class Router
 
     public function render($uri)
     {
-        $uriArray = explode("/", $uri);
-        $uriPartCount = count($uriArray);
+        try {
 
-        // echo '<pre>';
-        // var_dump($this->routes);
-        // echo '</pre>';
-        foreach ($this->routes as $route) {
+            $uriArray = explode("/", $uri);
+            $uriPartCount = count($uriArray);
 
-            $routeArray = explode("/", $route['uri']);
-            $routePartCount = count($routeArray);
             // echo '<pre>';
-            // var_dump($route['uri']);
+            // var_dump($this->routes);
             // echo '</pre>';
-            if ($uriPartCount !== $routePartCount) {
-                continue;
-            }
-            $notMatched = 0;
+            foreach ($this->routes as $route) {
 
-            for ($i = 0; $i < $routePartCount; $i++) {
-                $isWildCard = $routeArray[$i] === "*";
-                if (!$isWildCard && $uriArray[$i] !== $routeArray[$i]) {
-                    $notMatched++;
-                    break;
+                $routeArray = explode("/", $route['uri']);
+                $routePartCount = count($routeArray);
+                // echo '<pre>';
+                // var_dump($route['uri']);
+                // echo '</pre>';
+                if ($uriPartCount !== $routePartCount) {
+                    continue;
                 }
-            }
+                $notMatched = 0;
 
-            if ($notMatched === 0) {
-                if (strtoupper($route['method']) === $_SERVER['REQUEST_METHOD']) {
+                for ($i = 0; $i < $routePartCount; $i++) {
+                    $isWildCard = $routeArray[$i] === "*";
+                    if (!$isWildCard && $uriArray[$i] !== $routeArray[$i]) {
+                        $notMatched++;
+                        break;
+                    }
+                }
 
-                    if (isset($route['middlewares'])) {
-                        $middlewares = $route['middlewares'];
-                        foreach ($middlewares as $mw) {
-                            $middleware = $mw['middleware'];
-                            $params = $mw['params'];
-                            if (is_callable($middleware) && is_array($params)) {
+                if ($notMatched === 0) {
+                    if (strtoupper($route['method']) === $_SERVER['REQUEST_METHOD']) {
 
-                                // dd(["middleware" => $middleware, "params" => $params]);
-                                call_user_func($middleware, $params);
-                            } else if (is_callable($middleware)) {
-                                call_user_func($middleware);
+                        if (isset($route['middlewares'])) {
+                            $middlewares = $route['middlewares'];
+                            foreach ($middlewares as $mw) {
+                                $middleware = $mw['middleware'];
+                                $params = $mw['params'];
+                                if (is_callable($middleware) && is_array($params)) {
+
+                                    // dd(["middleware" => $middleware, "params" => $params]);
+                                    call_user_func($middleware, $params);
+                                } else if (is_callable($middleware)) {
+                                    call_user_func($middleware);
+                                }
                             }
                         }
+                        return require $route['controller'];
                     }
-                    return require $route['controller'];
                 }
             }
-        }
 
-        $this->abort(404);
+            $this->abort(404);
+        } catch (ValidationException $e) {
+            Session::flash('errors', $e->errors);
+            Session::setOldFlash($e->old);
+            return redirect($this->getPreviousRoute());
+        }
+    }
+    public function getPreviousRoute()
+    {
+
+        return $_SERVER['HTTP_REFERER'];
     }
 
     public static function abort($code = 404)

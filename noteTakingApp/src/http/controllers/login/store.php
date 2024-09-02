@@ -3,25 +3,25 @@
 use Core\App;
 use Core\Authenticator;
 use Core\Database;
-use Core\Session;
 use http\forms\LoginForm;
 
 $db = App::resolve(Database::class);
 
-$email = Session::setOldFlash('email', $_POST['email']);
-$password = Session::setOldFlash('password', $_POST['password']);
+$email = $_POST['email'];
+$password = $_POST['password'];
+$credentials = ['email' => $email, 'password' => $password];
 
-$form = new LoginForm();
-$form->validate(['email' => $email, 'password' => $password]);
+$form = LoginForm::validate($credentials);
 
-if (count($form->getErrors()) === 0) {
-    $auth = new Authenticator();
+$auth = new Authenticator();
 
-    $auth->attempt($db, ['email' => $email, 'password' => $password], function () {
+$auth->attempt(
+    $db,
+    $credentials,
+    function () {
         redirect('/');
-    });
-    $form->error([...$auth->getErrors()]);
-}
+    }
+);
 
-Session::flash('errors', $form->getErrors());
-redirect('/login');
+$form->error([...$auth->getErrors()])
+    ->throw();

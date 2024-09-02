@@ -28,9 +28,9 @@ class Session
 
         return $_SESSION['__flash'][$key] ?? $default;
     }
-    public static function setOldFlash(string $key, $value)
+    public static function setOldFlash($value)
     {
-        return $_SESSION['__flash']['old'][$key] = $value;
+        return $_SESSION['__flash']['old'] = $value;
     }
     public static function getOldFlash(string $key, $default = null)
     {
