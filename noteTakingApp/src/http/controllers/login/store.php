@@ -3,6 +3,7 @@
 use Core\App;
 use Core\Authenticator;
 use Core\Database;
+use Core\Session;
 use http\forms\LoginForm;
 
 $db = App::resolve(Database::class);
@@ -22,5 +23,5 @@ if (count($form->getErrors()) === 0) {
     $form->error([...$auth->getErrors()]);
 }
 
-$_SESSION['__flash']['errors'] = $form->getErrors();
+Session::flash('errors', $form->getErrors());
 redirect('/login');

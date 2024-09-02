@@ -1,4 +1,5 @@
 <?php
 
-$heading = "Login";
-renderView("login", ['heading' => $heading, 'errors' => $_SESSION['__flash']['errors'] ?? []]);
+use Core\Session;
+
+renderView("login", ['heading' => "Login", 'errors' => Session::getFlash('errors') ?? []]);
