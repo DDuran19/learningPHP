@@ -7,6 +7,7 @@ define('VIEWS', SOURCE . "/views/");
 define('COMPONENTS', SOURCE . "/components/");
 define('CONSTANTS', SOURCE . "/constants/");
 define('VALIDATORS', SOURCE . "/utils/validators/");
+require(ROOT_DIR . "/vendor/autoload.php");
 
 function requireControllers(string $path, array $vars = [])
 {
