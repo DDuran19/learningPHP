@@ -7,9 +7,8 @@ use http\forms\LoginForm;
 
 $db = App::resolve(Database::class);
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-
+$email = $_SESSION['__flash']['email'] = $_POST['email'];
+$password = $_SESSION['__flash']['password'] = $_POST['password'];
 
 $form = new LoginForm();
 $form->validate(['email' => $email, 'password' => $password]);
@@ -23,4 +22,5 @@ if (count($form->getErrors()) === 0) {
     $form->error([...$auth->getErrors()]);
 }
 
-renderView("login", ['heading' => 'Login', 'errors' => $form->getErrors()], true);
+$_SESSION['__flash']['errors'] = $form->getErrors();
+redirect('/login');

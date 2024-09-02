@@ -1,5 +1,4 @@
 <?php
 
 $heading = "Login";
-$errors = [];
-renderView("login", ['heading' => $heading, 'errors' => $errors]);
+renderView("login", ['heading' => $heading, 'errors' => $_SESSION['__flash']['errors'] ?? []]);

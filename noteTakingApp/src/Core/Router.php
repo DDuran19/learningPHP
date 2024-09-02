@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Middlewares\Middleware;
-
 abstract class HttpMethod
 {
     public const GET = 'get';
