@@ -1,5 +1,6 @@
 <?php
 
+use Core\Session;
+
 $heading = "Register";
-$errors = [];
-renderView("register", ['heading' => $heading, 'errors' => $errors]);
+renderView("register", ['heading' => "Register", 'errors' => Session::getFlash('errors')]);

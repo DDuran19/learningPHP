@@ -28,6 +28,14 @@ class Session
 
         return $_SESSION['__flash'][$key] ?? $default;
     }
+    public static function setOldFlash(string $key, $value)
+    {
+        return $_SESSION['__flash']['old'][$key] = $value;
+    }
+    public static function getOldFlash(string $key, $default = null)
+    {
+        return $_SESSION['__flash']['old'][$key] ?? $default;
+    }
 
     public static function has(string $key)
     {
@@ -44,6 +52,11 @@ class Session
     }
     public static function flush()
     {
-        $_SESSION = [];
+        return $_SESSION = [];
+    }
+
+    public static function old(string $key, $default = null)
+    {
+        return $_SESSION['__flush']['old'][$key] ?? $default;
     }
 }

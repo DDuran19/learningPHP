@@ -8,8 +8,8 @@ use http\forms\LoginForm;
 
 $db = App::resolve(Database::class);
 
-$email = $_SESSION['__flash']['email'] = $_POST['email'];
-$password = $_SESSION['__flash']['password'] = $_POST['password'];
+$email = Session::setOldFlash('email', $_POST['email']);
+$password = Session::setOldFlash('password', $_POST['password']);
 
 $form = new LoginForm();
 $form->validate(['email' => $email, 'password' => $password]);
