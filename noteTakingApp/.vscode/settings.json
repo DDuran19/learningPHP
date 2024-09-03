@@ -1,3 +1,5 @@
 {
-    "php.suggest.basic": false
+    "php.suggest.basic": false,
+    "emmet.triggerExpansionOnTab": true, // enable tab to expanse emmet tags
+    "blade.format.enable": true // if you would like to enable blade format
 }

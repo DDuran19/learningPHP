@@ -2,12 +2,14 @@
 
 define('ROOT_DIR', __DIR__);
 define('SOURCE', ROOT_DIR . "/src");
-define('CONTROLLERS', SOURCE . "/controllers/");
+define('CONTROLLERS', SOURCE . "/http/controllers/");
+define('VIEWS', SOURCE . "/views/");
 define('COMPONENTS', SOURCE . "/components/");
 define('CONSTANTS', SOURCE . "/constants/");
 define('VALIDATORS', SOURCE . "/utils/validators/");
+require(ROOT_DIR . "/vendor/autoload.php");
 
-function requireControllers($path, $vars = [])
+function requireControllers(string $path, array $vars = [])
 {
     extract($vars);
     return require(CONTROLLERS . $path);
@@ -26,13 +28,13 @@ function requireComponents(string $path, array $vars = [])
     return require(COMPONENTS . $path);
 }
 
-function requireConstants($path, $vars = [])
+function requireConstants(string $path, array $vars = [])
 {
     extract($vars);
     return require(CONSTANTS . $path);
 }
 
-function requireValidators($path, $vars = [])
+function requireValidators(string $path, array $vars = [])
 {
     extract($vars);
     return require(VALIDATORS . $path);
@@ -42,6 +44,7 @@ function requireClasses()
     spl_autoload_register(function ($class) {
 
         $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
-        require(SOURCE . "/namespaces/" . $class . ".php");
+
+        return require(SOURCE . "/" . $class . ".php");
     });
 }

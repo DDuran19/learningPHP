@@ -1,0 +1,26 @@
+{
+    "name": "denve/note-taking-app",
+    "authors": [
+        {
+            "name": "Denver James Duran",
+            "email": "128191960+DDuran19@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "illuminate/collections": "^11.21"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core",
+            "http\\": "src/http"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.35"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
