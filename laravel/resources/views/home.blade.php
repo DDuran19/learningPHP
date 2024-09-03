@@ -3,6 +3,6 @@
         Homepage
     </x-slot:heading>
     <h1>
-        Hello from the homepage
+        Home
     </h1>
 </x-layout>
