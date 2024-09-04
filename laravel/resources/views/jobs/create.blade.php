@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Create Job Listing
+        Job Listings
     </x-slot:heading>
     <form method="POST" action="/jobs">
         @csrf
