@@ -10,36 +10,38 @@
                 <p class="mt-1 text-sm leading-6 text-gray-600">We just need a couple of details.</p>
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-4">
-                        <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Job Title</label>
+                    <x-form-field>
+                        <x-form-label for="title">
+                            Job Title
+                        </x-form-label>
                         <div class="mt-2">
-                            <div
-                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input type="text" name="title" id="title" autocomplete="title"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="Ex. Senior Laravel Developer" :minlength=3 value="{{ old('title') }}"
-                                    required>
-                            </div>
-                            @if ($errors->has('title'))
-                                <p class="text-red-500 font-bold text-xs">{{ $errors->first('title') }}</p>
-                            @endif
+                            <x-form-input 
+                                id="title" 
+                                name="title" 
+                                placeholder="Ex. Senior Laravel Developer" 
+                                :minlength=3
+                                required
+                                value="{{ old('title') ?? isset($job) ? $job->title  : '' }}" 
+                            />
+                            <x-form-error name="title" />
                         </div>
-                    </div>
+                    </x-form-field>
 
-                    <div class="sm:col-span-4">
-                        <label for="salary" class="block text-sm font-medium leading-6 text-gray-900">Salary</label>
+                    <x-form-field>
+                        <x-form-label for="salary">
+                            Salary
+                        </x-form-label>
                         <div class="mt-2">
-                            <div
-                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input type="text" name="salary" id="salary" autocomplete="salary"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="$50,000 - $100,000 /year" value="{{ old('salary') }}" required>
-                            </div>
-                            @if ($errors->has('salary'))
-                                <p class="text-red-500 font-bold text-xs">{{ $errors->first('salary') }}</p>
-                            @endif
+                            <x-form-input 
+                                id="salary" 
+                                name="salary" 
+                                placeholder="$50,000 - $100,000 /year" 
+                                required
+                                value="{{ old('salary') ?? isset($job) ? $job->salary  : '' }}" 
+                            />
+                            <x-form-error name="salary" />
                         </div>
-                    </div>
+                    </x-form-field>
                 </div>
 
                 @if ($errors->has('message'))
