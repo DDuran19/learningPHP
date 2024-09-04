@@ -2,34 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Job
+class Job extends Model
 {
-    public static function all(): Collection
-    {
+    use HasFactory;
+    protected $table = 'job_listings';
 
-        return new Collection([
-            [
-                'id' => 1,
-                'title' => 'Director',
-                'salary' => '$50,000'
-            ],
-            [
-                'id' => 2,
-                'title' => "Programmer",
-                'salary' => '$10,000'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Teacher',
-                'salary' => '$40,000'
-            ]
-        ]);
+    protected $guarded = [];
+
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
     }
 
-    public static function findFirst(int $id): ?array
+    public function tags()
     {
-        return static::all()->where('id', $id)->first();
+        return $this->belongsToMany(Tag::class, foreignPivotKey: "job_listing_id");
     }
 }
