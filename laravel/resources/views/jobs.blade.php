@@ -16,5 +16,9 @@
             </article>
             @endforeach
         </div>
+
+        <div class="mt-6">
+            {{ $jobs->links() }}
+        </div>
     </h1>
 </x-layout>
