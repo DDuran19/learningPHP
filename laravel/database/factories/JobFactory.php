@@ -21,7 +21,7 @@ class JobFactory extends Factory
         return [
             'title' => fake()->jobTitle(),
             'salary' => '$' . fake()->numberBetween(10000, 50000),
-            'employer_id' => Employer::factory()->recycle(Employer::all()),
+            'employer_id' => Employer::all()->random()->id
         ];
     }
 }

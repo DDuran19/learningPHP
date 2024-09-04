@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Database\Factories\JobFactory;
+use App\Models\Job;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class Job extends Seeder
+class JobSeeder extends Seeder
 {
     protected $table = 'job_listings';
     /**
@@ -14,6 +14,6 @@ class Job extends Seeder
      */
     public function run(): void
     {
-        JobFactory::factory(10)->create();
+        Job::factory(10)->create();
     }
 }
