@@ -17,8 +17,12 @@
                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                 <input type="text" name="title" id="title" autocomplete="title"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="Ex. Senior Laravel Developer">
+                                    placeholder="Ex. Senior Laravel Developer" :minlength=3 value="{{ old('title') }}"
+                                    required>
                             </div>
+                            @if ($errors->has('title'))
+                                <p class="text-red-500 font-bold text-xs">{{ $errors->first('title') }}</p>
+                            @endif
                         </div>
                     </div>
 
@@ -29,12 +33,18 @@
                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                 <input type="text" name="salary" id="salary" autocomplete="salary"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="$50,000 - $100,000 /year">
+                                    placeholder="$50,000 - $100,000 /year" value="{{ old('salary') }}" required>
                             </div>
+                            @if ($errors->has('salary'))
+                                <p class="text-red-500 font-bold text-xs">{{ $errors->first('salary') }}</p>
+                            @endif
                         </div>
                     </div>
-
                 </div>
+
+                @if ($errors->has('message'))
+                    <p class="text-red-500 font-bold text-xs">{{ $errors->first('message') }}</p>
+                @endif
             </div>
         </div>
 

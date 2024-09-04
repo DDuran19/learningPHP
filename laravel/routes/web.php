@@ -9,6 +9,10 @@ Route::get('/', function () {
 Route::get('/jobs', fn() => view('jobs.index', ['jobs' => Job::with('employer')->latest()->simplePaginate(perPage: 3)]));
 
 Route::post('/jobs', function () {
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'salary' => ['required'],
+    ]);
     Job::create([
         'title' => request('title'),
         'salary' => request('salary'),
