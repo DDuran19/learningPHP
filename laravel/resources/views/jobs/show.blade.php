@@ -6,4 +6,10 @@
     <h1>
         <strong>{{ $job['title'] }}</strong>: Pays {{ $job['salary'] }} per year
     </h1>
+
+    <p class="mt-6">
+        <x-button>
+            Edit Job
+        </x-button>
+    </p>
 </x-layout>
