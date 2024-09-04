@@ -9,7 +9,7 @@ Route::get('/', function () {
 Route::get('/jobs', fn() => view('jobs', ['jobs' => Job::all()]));
 
 Route::get('/jobs/{id}', function ($id) {
-    $job = Job::findFirst($id);
+    $job = Job::find($id);
 
     if (! $job) {
         abort(404);
