@@ -33,6 +33,13 @@
                             <x-nav-link href="/login" :active="request()->is('login')" type="button">Login</x-nav-link>
                             <x-nav-link href="/register" :active="request()->is('register')" type="button">Register</x-nav-link>
                         @endguest
+
+                        @auth
+                            <form action="/logout" method="post" id="logout-form">
+                                @csrf
+                                <x-form-button>Logout</x-form-button>
+                            </form>
+                        @endauth
                     </div>
                     <div class="-mr-2 flex md:hidden">
                         @guest

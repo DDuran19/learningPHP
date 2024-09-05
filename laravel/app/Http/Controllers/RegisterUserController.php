@@ -30,6 +30,9 @@ class RegisterUserController extends Controller
 
         $user = User::create($validatedAttributes);
         Auth::login($user);
+
+        request()->session()->regenerate();
+
         return redirect('/jobs');
     }
 }

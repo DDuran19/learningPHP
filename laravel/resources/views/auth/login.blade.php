@@ -16,7 +16,7 @@
                         </x-form-label>
                         <div class="mt-2">
                             <x-form-input type="email" id="email" name="email" :minlength=3 required
-                                value="{{ old('email') ?? isset($job) ? $job->email : '' }}" />
+                                :value="old('email')" />
                             <x-form-error name="email" />
                         </div>
                     </x-form-field>
@@ -26,8 +26,7 @@
                             Password
                         </x-form-label>
                         <div class="mt-2">
-                            <x-form-input type="password" id="password" name="password" :minlength=3 required
-                                value="{{ old('password') ?? isset($job) ? $job->password : '' }}" />
+                            <x-form-input type="password" id="password" name="password" :minlength=3 required />
                             <x-form-error name="password" />
                         </div>
                     </x-form-field>

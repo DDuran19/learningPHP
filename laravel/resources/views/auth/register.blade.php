@@ -16,7 +16,7 @@
                         </x-form-label>
                         <div class="mt-2">
                             <x-form-input id="first_name" name="first_name" placeholder="Ex. John" :minlength=3 required
-                                value="{{ old('first_name') ?? '' }}" />
+                                :value="old('first_name')" />
                             <x-form-error name="first_name" />
                         </div>
                     </x-form-field>
@@ -26,7 +26,7 @@
                         </x-form-label>
                         <div class="mt-2">
                             <x-form-input id="last_name" name="last_name" placeholder="Ex. Doe" :minlength=3 required
-                                value="{{ old('last_name') ?? '' }}" />
+                                :value="old('last_name')" />
                             <x-form-error name="last_name" />
                         </div>
                     </x-form-field>
@@ -37,7 +37,7 @@
                         </x-form-label>
                         <div class="mt-2">
                             <x-form-input type="email" id="email" name="email" placeholder="Ex. Doe"
-                                :minlength=3 required value="{{ old('email') ?? '' }}" />
+                                :minlength=3 required :value="old('email')" />
                             <x-form-error name="email" />
                         </div>
                     </x-form-field>
@@ -48,7 +48,7 @@
                         </x-form-label>
                         <div class="mt-2">
                             <x-form-input type="password" id="password" name="password" :minlength=3 required
-                                value="{{ old('password') ?? '' }}" />
+                                :value="old('password')" />
                             <x-form-error name="password" />
                         </div>
                     </x-form-field>
@@ -59,7 +59,7 @@
                         </x-form-label>
                         <div class="mt-2">
                             <x-form-input type="password" id="password_confirmation" name="password_confirmation"
-                                :minlength=3 required value="{{ old('password_confirmation') ?? '' }}" />
+                                :minlength=3 required :value="old('password_confirmation')" />
                             <x-form-error name="password_confirmation" />
                         </div>
                     </x-form-field>
