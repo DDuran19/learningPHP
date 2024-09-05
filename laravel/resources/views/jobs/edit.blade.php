@@ -8,19 +8,13 @@
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <x-form-field>
+                    <x-form-field>
                         <x-form-label for="title">
                             Job Title
                         </x-form-label>
                         <div class="mt-2">
-                            <x-form-input 
-                                id="title" 
-                                name="title" 
-                                placeholder="Ex. Senior Laravel Developer" 
-                                :minlength=3
-                                required
-                                value="{{ old('title') ?? isset($job) ? $job->title  : '' }}" 
-                            />
+                            <x-form-input id="title" name="title" placeholder="Ex. Senior Laravel Developer"
+                                :minlength=3 required value="{{ old('title') ?? isset($job) ? $job->title : '' }}" />
                             <x-form-error name="title" />
                         </div>
                     </x-form-field>
@@ -30,13 +24,8 @@
                             Salary
                         </x-form-label>
                         <div class="mt-2">
-                            <x-form-input 
-                                id="salary" 
-                                name="salary" 
-                                placeholder="$50,000 - $100,000 /year" 
-                                required
-                                value="{{ old('salary') ?? isset($job) ? $job->salary  : '' }}" 
-                            />
+                            <x-form-input id="salary" name="salary" placeholder="$50,000 - $100,000 /year" required
+                                value="{{ old('salary') ?? isset($job) ? $job->salary : '' }}" />
                             <x-form-error name="salary" />
                         </div>
                     </x-form-field>
@@ -59,10 +48,7 @@
 
                 <a href="/jobs/{{ $job->id }}" type="button"
                     class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
-                <button type="submit"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Update Job Listing
-                </button>
+                <x-form-button> Update Job Listing </x-form-button>
             </div>
         </div>
     </form>
