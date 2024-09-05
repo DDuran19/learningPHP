@@ -3,13 +3,22 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Mail\JobPosted;
+use App\Models\Job;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/mail-content', function () {
+    $job = new Job([
+        'title' => 'Job Title',
+        'salary' => 'Salary',
+        'employer_id' => 1,
+        'id' => 1
+    ]);
+    return new JobPosted($job);
+});
 
 Route::view('/', 'home');
 Route::view('/contact', 'contact');
-
-// Route::resource('jobs', JobController::class)->only(['index', 'show']);
-// Route::resource('jobs', JobController::class)->except(['index', 'show'])->middleware('auth');
 
 // jobs
 Route::controller(JobController::class)->group(function () {
