@@ -8,7 +8,7 @@
     </h1>
     <strong>Company</strong>: {{ $job->employer->name }}
 
-    @can('edit-job', $job)
+    @can('update', $job)
         <p class="mt-6">
             <x-button href="/jobs/{{ $job->id }}/edit">
                 Edit Job

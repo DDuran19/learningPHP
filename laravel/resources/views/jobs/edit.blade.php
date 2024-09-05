@@ -39,10 +39,12 @@
 
         <div class="mt-6 flex items-center justify-between gap-x-6">
             <div>
-                <x-button role="button" type="submit" form="delete-form" href="/jobs/{{ $job->id }}"
-                    class="text-red-500 hover:text-red-700">
-                    Delete
-                </x-button>
+                @can('delete', $job)
+                    <x-button role="button" type="submit" form="delete-form" href="/jobs/{{ $job->id }}"
+                        class="text-red-500 hover:text-red-700">
+                        Delete
+                    </x-button>
+                @endcan
             </div>
             <div class="flex items-center gap-x-6">
 
@@ -53,8 +55,10 @@
         </div>
     </form>
 
-    <form action="/jobs/{{ $job->id }}" method="post" hidden id="delete-form">
-        @csrf
-        @method('DELETE')
-    </form>
+    @can('delete', $job)
+        <form action="/jobs/{{ $job->id }}" method="post" hidden id="delete-form">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endcan
 </x-layout>
