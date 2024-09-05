@@ -8,9 +8,11 @@
     </h1>
     <strong>Company</strong>: {{ $job->employer->name }}
 
-    <p class="mt-6">
-        <x-button href="/jobs/{{ $job->id }}/edit">
-            Edit Job
-        </x-button>
-    </p>
+    @can('edit-job', $job)
+        <p class="mt-6">
+            <x-button href="/jobs/{{ $job->id }}/edit">
+                Edit Job
+            </x-button>
+        </p>
+    @endcan
 </x-layout>

@@ -26,7 +26,8 @@ class SessionController extends Controller
         }
         request()->session()->regenerate();
 
-        return redirect('/jobs')->with('success', 'Welcome back!');
+        $redirect_to = request()->query('redirect_to', '/jobs');
+        return redirect($redirect_to)->with('success', 'Welcome back!');
     }
 
     public function destroy()

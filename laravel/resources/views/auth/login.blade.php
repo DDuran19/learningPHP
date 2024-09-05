@@ -2,7 +2,10 @@
     <x-slot:heading>
         Login
     </x-slot:heading>
-    <form method="POST" action="/login">
+    @php
+        $redirect_to = request()->query('redirect_to');
+    @endphp
+    <form method="POST" action="/login?{{ $redirect_to ? 'redirect_to=' . $redirect_to : '' }}">
         @csrf
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
