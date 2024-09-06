@@ -1,4 +1,4 @@
-@props(['variant' => 'base'])
+@props(['tag', 'variant' => 'base' ])
 
 @php
     $classes = 'bg-white/10 rounded-xl hover:bg-white/25 transition-colors duration-300 ';
@@ -13,6 +13,6 @@
 
 @endphp
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
+<a href="/tags/{{ htmlspecialchars(strtolower($tag->name)) }}" {{ $attributes->merge(['class' => $classes]) }}>
+    {{ htmlspecialchars($tag->name) }}
 </a>
